@@ -1,9 +1,14 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3.6-openjdk-8'
+            args '-v $HOME/.m2:/root/.m2'
+        }
+    }
     stages {
         stage('Build') {
             steps {
-                git 'https://github.com/Shreya-awasthi/hello-spring'
+                git 'https://github.com/GITHUBUSERNAME/hello-spring'
                 sh "mvn package"
             }
             post {
